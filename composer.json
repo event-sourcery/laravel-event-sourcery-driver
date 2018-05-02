@@ -42,5 +42,15 @@
     "sort-packages": true,
     "bin-dir": "bin"
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "EventSourcery\\Laravel\\ServiceProvider"
+      ],
+      "aliases": {
+        "Debugbar": "Barryvdh\\Debugbar\\Facade"
+      }
+    }
+  },
   "license": "MIT"
 }

@@ -12,7 +12,6 @@ This code is extremely proof-of-concepty. Once we work in production with it for
 
 todo
 
-1. migrations
-2. documentation
-3. *shrug*
-4. tooling
+1. documentation
+2. *shrug*
+3. tooling

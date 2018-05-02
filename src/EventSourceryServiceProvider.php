@@ -41,6 +41,8 @@ class EventSourceryServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+
         $dispatcher = $this->app[EventDispatcher::class];
         $dispatcher->addListener($this->app[ProjectionManager::class]);
     }
