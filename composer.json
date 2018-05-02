@@ -1,0 +1,46 @@
+{
+  "name": "event-sourcery/laravel",
+  "description": "Laravel driver for Event Sourcery framework.",
+  "authors": [
+    {
+      "name": "Shawn McCool",
+      "email": "shawn@heybigname.com",
+      "homepage": "http://shawnmc.cool/"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "laravel/framework": "5.6.*",
+    "psr/container": "1.0.0",
+    "event-sourcery/event-sourcery": "@dev"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^4.0.3",
+    "heybigname/phpspec-laravel": "^4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "EventSourcery\\Laravel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "spec\\EventSourcery\\Laravel\\": "spec/"
+    },
+    "files": [
+      "vendor/event-sourcery/event-sourcery/src/PhpSpec/expect.php"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:event-sourcery/event-sourcery.git"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "bin-dir": "bin"
+  },
+  "license": "MIT"
+}
