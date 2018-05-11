@@ -1,16 +1,16 @@
 <?php namespace EventSourcery\Laravel;
 
 use DB;
-use EventSourcery\PersonalData\EncryptedPersonalData;
-use EventSourcery\PersonalData\PersonalCryptographyStore;
-use EventSourcery\PersonalData\PersonalData;
-use EventSourcery\PersonalData\PersonalDataEncryption;
-use EventSourcery\PersonalData\PersonalDataKey;
-use EventSourcery\PersonalData\PersonalDataStore;
-use EventSourcery\PersonalData\PersonalEncryptionKeyStore;
-use EventSourcery\PersonalData\PersonalKey;
-use EventSourcery\PersonalData\ProtectedData;
-use EventSourcery\PersonalData\ProtectedDataKey;
+use EventSourcery\EventSourcery\PersonalData\EncryptedPersonalData;
+use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalData;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataKey;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalKey;
+use EventSourcery\EventSourcery\PersonalData\ProtectedData;
+use EventSourcery\EventSourcery\PersonalData\ProtectedDataKey;
 use Illuminate\Database\Query\Builder;
 
 class LaravelPersonalDataStore implements PersonalDataStore {

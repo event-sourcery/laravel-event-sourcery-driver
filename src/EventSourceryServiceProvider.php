@@ -1,33 +1,35 @@
 <?php namespace EventSourcery\Laravel;
 
-use EventSourcery\Commands\CommandBus;
-use EventSourcery\Commands\ReflectionResolutionCommandBus;
-use EventSourcery\EventDispatch\EventDispatcher;
-use EventSourcery\EventDispatch\ImmediateEventDispatcher;
-use EventSourcery\EventSourcing\DomainEventClassMap;
-use EventSourcery\EventSourcing\EventStore;
-use EventSourcery\PersonalData\PersonalCryptographyStore;
-use EventSourcery\Queries\ProjectionManager;
-use EventSourcery\Queries\Projections;
-use EventSourcery\Serialization\DomainEventSerializer;
-use EventSourcery\Serialization\ReflectionBasedDomainEventSerializer;
+use EventSourcery\EventSourcery\Commands\CommandBus;
+use EventSourcery\EventSourcery\Commands\ReflectionResolutionCommandBus;
+use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
+use EventSourcery\EventSourcery\EventDispatch\ImmediateEventDispatcher;
+use EventSourcery\EventSourcery\EventSourcing\DomainEventClassMap;
+use EventSourcery\EventSourcery\EventSourcing\EventStore;
+use EventSourcery\EventSourcery\PersonalData\AesPersonalDataEncryption;
+use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataStore;
+use EventSourcery\EventSourcery\Queries\ProjectionManager;
+use EventSourcery\EventSourcery\Queries\Projections;
+use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
+use EventSourcery\EventSourcery\Serialization\ReflectionBasedDomainEventSerializer;
 use Illuminate\Support\ServiceProvider;
 
 class EventSourceryServiceProvider extends ServiceProvider {
 
     public function register() {
-
-        $this->app->singleton(EventDispatcher::class, function ($app) {
-            return new ImmediateEventDispatcher;
-        });
+        $this->app->bind(DomainEventSerializer::class, ReflectionBasedDomainEventSerializer::class);
 
         $this->app->singleton(DomainEventClassMap::class, function ($app) {
             return new DomainEventClassMap;
         });
 
-        $this->app->bind(DomainEventSerializer::class, ReflectionBasedDomainEventSerializer::class);
+        $this->app->singleton(EventDispatcher::class, function ($app) {
+            return new ImmediateEventDispatcher;
+        });
 
-        $this->app->bind(EventStore::class, function ($app) {
+        $this->app->singleton(EventStore::class, function ($app) {
             return new RelationalEventStore($app[DomainEventSerializer::class]);
         });
 
@@ -38,6 +40,10 @@ class EventSourceryServiceProvider extends ServiceProvider {
         $this->app->bind(CommandBus::class, ReflectionResolutionCommandBus::class);
 
         $this->app->bind(PersonalCryptographyStore::class, LaravelPersonalCryptographyStore::class);
+
+        $this->app->bind(PersonalDataStore::class, LaravelPersonalDataStore::class);
+
+        $this->app->bind(PersonalDataEncryption::class, AesPersonalDataEncryption::class);
     }
 
     public function boot() {

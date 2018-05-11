@@ -1,13 +1,13 @@
 <?php namespace EventSourcery\Laravel;
 
 use DB;
-use EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
-use EventSourcery\PersonalData\CouldNotFindCryptographyForPerson;
-use EventSourcery\PersonalData\CryptographicDetails;
-use EventSourcery\PersonalData\EncryptionKeyGenerator;
-use EventSourcery\PersonalData\PersonalCryptographyStore;
-use EventSourcery\PersonalData\PersonalEncryptionKeyStore;
-use EventSourcery\PersonalData\PersonalKey;
+use EventSourcery\EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
+use EventSourcery\EventSourcery\PersonalData\CouldNotFindCryptographyForPerson;
+use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
+use EventSourcery\EventSourcery\PersonalData\EncryptionKeyGenerator;
+use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use Illuminate\Database\Query\Builder;
 
 class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {

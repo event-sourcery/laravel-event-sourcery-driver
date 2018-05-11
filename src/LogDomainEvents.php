@@ -1,7 +1,7 @@
 <?php namespace EventSourcery\Laravel;
 
-use EventSourcery\EventDispatch\Listener;
-use EventSourcery\EventSourcing\DomainEvent;
+use EventSourcery\EventSourcery\EventDispatch\Listener;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 
 class LogDomainEvents implements Listener {
 

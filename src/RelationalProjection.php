@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder;
-use EventSourcery\EventSourcing\DomainEvent;
-use EventSourcery\EventSourcing\EventStore;
-use EventSourcery\EventSourcing\Projection;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
+use EventSourcery\EventSourcery\EventSourcing\EventStore;
+use EventSourcery\EventSourcery\EventSourcing\Projection;
 
 abstract class RelationalProjection implements Projection {
 

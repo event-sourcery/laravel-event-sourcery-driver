@@ -1,15 +1,15 @@
 <?php namespace EventSourcery\Laravel;
 
 use DB;
+use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use Illuminate\Support\Collection;
-use EventSourcery\EventSourcing\DomainEvent;
-use EventSourcery\EventSourcing\DomainEvents;
-use EventSourcery\EventSourcing\DomainEventSerializer;
-use EventSourcery\EventSourcing\EventStore;
-use EventSourcery\EventSourcing\StreamEvent;
-use EventSourcery\EventSourcing\StreamEvents;
-use EventSourcery\EventSourcing\StreamId;
-use EventSourcery\EventSourcing\StreamVersion;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
+use EventSourcery\EventSourcery\EventSourcing\EventStore;
+use EventSourcery\EventSourcery\EventSourcing\StreamEvent;
+use EventSourcery\EventSourcery\EventSourcing\StreamEvents;
+use EventSourcery\EventSourcery\EventSourcing\StreamId;
+use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 
 class RelationalEventStore implements EventStore {
 

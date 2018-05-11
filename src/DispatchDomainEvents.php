@@ -4,10 +4,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use EventSourcery\EventSourcing\DomainEvent;
-use EventSourcery\EventSourcing\DomainEvents;
-use EventSourcery\EventSourcing\DomainEventSerializer;
-use EventSourcery\EventSourcing\EventDispatcher;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
+use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
+use EventSourcery\EventSourcery\EventSourcing\DomainEventSerializer;
+use EventSourcery\EventSourcery\EventSourcing\EventDispatcher;
 
 class DispatchDomainEvents implements ShouldQueue {
 

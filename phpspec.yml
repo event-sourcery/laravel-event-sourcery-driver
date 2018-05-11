@@ -1,8 +1,0 @@
-suites:
-    main:
-        namespace: EventSourcery\Laravel
-        psr4_prefix: EventSourcery\Laravel
-        src_path: src
-extensions:
-  EventSourcery\PhpSpec\EventSourcingExtension: ~
-formatter.name: pretty
