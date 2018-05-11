@@ -1,6 +1,7 @@
 <?php namespace EventSourcery\Laravel;
 
 use DB;
+use EventSourcery\EventSourcery\PersonalData\CouldNotRetrievePersonalData;
 use EventSourcery\EventSourcery\PersonalData\EncryptedPersonalData;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalData;
