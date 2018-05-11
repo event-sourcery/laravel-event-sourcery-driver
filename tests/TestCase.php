@@ -7,11 +7,17 @@ class TestCase extends OrchestraTestCase {
 
     protected function setUp() {
         parent::setUp();
+        $this->artisan('migrate', ['--database' => 'development']);
+    }
+
+    protected function tearDown() {
+        $this->artisan('migrate:reset', ['--database' => 'development']);
+        parent::tearDown();
     }
 
     protected function getEnvironmentSetUp($app) {
-        $app['config']->set('database.default', 'mysql');
-        $app['config']->set('database.connections.mysql', [
+        $app['config']->set('database.default', 'development');
+        $app['config']->set('database.connections.development', [
             'driver'   => 'mysql',
             'host'     => '127.0.0.1',
             'port'     => '3306',

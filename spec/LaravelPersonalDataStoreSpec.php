@@ -2,16 +2,16 @@
 
 use EventSourcery\Laravel\LaravelPersonalCryptographyStore;
 use EventSourcery\Laravel\LaravelPersonalDataStore;
-use EventSourcery\PersonalData\AesPersonalDataEncryption;
-use EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
-use EventSourcery\PersonalData\CryptographicDetails;
-use EventSourcery\PersonalData\EncryptionKey;
-use EventSourcery\PersonalData\InitializationVector;
-use EventSourcery\PersonalData\Pbkdf2KeyGenerator;
-use EventSourcery\PersonalData\PersonalCryptographyStore;
-use EventSourcery\PersonalData\PersonalData;
-use EventSourcery\PersonalData\PersonalDataKey;
-use EventSourcery\PersonalData\PersonalKey;
+use EventSourcery\EventSourcery\PersonalData\AesPersonalDataEncryption;
+use EventSourcery\EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
+use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
+use EventSourcery\EventSourcery\PersonalData\EncryptionKey;
+use EventSourcery\EventSourcery\PersonalData\InitializationVector;
+use EventSourcery\EventSourcery\PersonalData\Pbkdf2KeyGenerator;
+use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
+use EventSourcery\EventSourcery\PersonalData\PersonalData;
+use EventSourcery\EventSourcery\PersonalData\PersonalDataKey;
+use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use PhpSpec\Laravel\LaravelObjectBehavior;
 
 class LaravelPersonalDataStoreSpec extends LaravelObjectBehavior {
