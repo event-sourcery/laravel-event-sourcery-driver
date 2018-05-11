@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalDataStoreTable extends Migration {
+class EventSourceryCreatePersonalDataStoreTable extends Migration {
 
     public function up() {
         Schema::create('personal_data_store', function (Blueprint $t) {

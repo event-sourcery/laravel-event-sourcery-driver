@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersonalCryptographyStoreTable extends Migration {
+class EventSourceryCreatePersonalCryptographyStoreTable extends Migration {
 
     public function up() {
         Schema::create('personal_cryptography_store', function (Blueprint $t) {
