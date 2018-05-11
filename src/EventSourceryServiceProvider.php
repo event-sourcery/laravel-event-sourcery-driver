@@ -51,7 +51,6 @@ class EventSourceryServiceProvider extends ServiceProvider {
 
         $this->loadMigrationsFrom($migrationPath);
 
-        dd(database_path($migrationPath));
         $this->publishes([
             $migrationPath => database_path('migrations'),
         ], 'migrations');
