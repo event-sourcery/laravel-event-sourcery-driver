@@ -1,5 +1,5 @@
 {
-  "name": "event-sourcery/laravel",
+  "name": "event-sourcery/laravel-event-sourcery-driver",
   "description": "Laravel driver for an Event Sourcing / CQRS framework.",
   "keywords": [
     "event sourcing",
