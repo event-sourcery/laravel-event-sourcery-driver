@@ -16,9 +16,11 @@ This code is extremely proof-of-concepty. Once we work in production with it for
 
 `composer require event-sourcery/laravel`
 
-``
+Laravel will auto-detect the package and the service provider will be installed automatically.
 
-Laravel will auto-detect the package and the service provider will be run by default.
+`php artisan vendor:publish --tag=migrations && php artisan migrate`
+
+The migrations will create database tables for the Event Store, Personal Data Store and Personal Cryptography Store.
 
 
 # Testing #
