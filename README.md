@@ -18,7 +18,7 @@ This code is extremely proof-of-concepty. Once we work in production with it for
 
 Laravel will auto-detect the package and the service provider will be installed automatically.
 
-`php artisan vendor:publish --tag=migrations && php artisan migrate`
+`php artisan migrate`
 
 The migrations will create database tables for the Event Store, Personal Data Store and Personal Cryptography Store.
 
