@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e2bbec76e49435db0f66ce6561ff83a",
+    "content-hash": "0b13aee1e072f9d23b95ccc381065b84",
     "packages": [
         {
             "name": "doctrine/instantiator",
@@ -66,12 +66,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "51f762a91e9f4c20a09d4a7cc1b926c9ed6f74bf"
+                "reference": "76559c9051ed764ff5a0f90af52812d802b21e22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/51f762a91e9f4c20a09d4a7cc1b926c9ed6f74bf",
-                "reference": "51f762a91e9f4c20a09d4a7cc1b926c9ed6f74bf",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/76559c9051ed764ff5a0f90af52812d802b21e22",
+                "reference": "76559c9051ed764ff5a0f90af52812d802b21e22",
                 "shasum": ""
             },
             "require": {
@@ -86,14 +86,7 @@
                     "EventSourcery\\EventSourcery\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "spec\\EventSourcery\\EventSourcery\\": "spec/"
-                },
-                "files": [
-                    "src/PhpSpec/expect.php"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -104,18 +97,14 @@
                     "homepage": "http://shawnmc.cool/"
                 }
             ],
-            "description": "A PHP CQRS / ES Library.",
+            "description": "Event Sourcery PHP Event Sourcing CQRS Library",
             "keywords": [
                 "cqrs",
                 "domain event",
                 "event sourcing",
                 "reactive"
             ],
-            "support": {
-                "source": "https://github.com/event-sourcery/event-sourcery/tree/master",
-                "issues": "https://github.com/event-sourcery/event-sourcery/issues"
-            },
-            "time": "2018-05-11T09:13:17+00:00"
+            "time": "2018-05-17T08:31:09+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1591,16 +1580,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.6.21",
+            "version": "v5.6.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "458a89b1c5ff73072c27308566f444c790f76f28"
+                "reference": "637fd797a6dde8d24a9f07da77e375ec251c5d24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/458a89b1c5ff73072c27308566f444c790f76f28",
-                "reference": "458a89b1c5ff73072c27308566f444c790f76f28",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/637fd797a6dde8d24a9f07da77e375ec251c5d24",
+                "reference": "637fd797a6dde8d24a9f07da77e375ec251c5d24",
                 "shasum": ""
             },
             "require": {
@@ -1726,7 +1715,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-05-08T13:30:15+00:00"
+            "time": "2018-05-15T13:34:20+00:00"
         },
         {
             "name": "league/flysystem",

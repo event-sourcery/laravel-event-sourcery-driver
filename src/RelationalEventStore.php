@@ -32,7 +32,7 @@ class RelationalEventStore implements EventStore {
                     return new StreamEvent(
                         StreamId::fromString($e->stream_id),
                         StreamVersion::fromInt($e->stream_version),
-                        $this->serializer->deserialize($e)
+                        $this->serializer->deserialize($e->event_data)
                     );
                 })
                 ->toArray()

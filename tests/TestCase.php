@@ -1,13 +1,23 @@
 <?php namespace Tests\EventSourcery\Laravel;
 
+use EventSourcery\EventSourcery\EventSourcing\DomainEventClassMap;
 use EventSourcery\Laravel\EventSourceryServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Tests\EventSourcery\Laravel\Stubs\TestEvent;
+use Tests\EventSourcery\Laravel\Stubs\TestPersonalEvent;
 
 class TestCase extends OrchestraTestCase {
 
     protected function setUp() {
         parent::setUp();
         $this->artisan('migrate', ['--database' => 'development']);
+
+        $this->app->bind(DomainEventClassMap::class, function() {
+            $classMap = new DomainEventClassMap();
+            $classMap->add("TestEvent", TestEvent::class);
+            $classMap->add("TestPersonalEvent", TestPersonalEvent::class);
+            return $classMap;
+        });
     }
 
     protected function tearDown() {
