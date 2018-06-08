@@ -4,13 +4,24 @@ This is the Laravel driver for the [Event Sourcery](https://github.com/event-sou
 
 **Library is under conceptual development. Do not use.** 
 
-todo
+# Table of Contents
+
+  * [Todo List](#todo-list)
+  * [Documentation](#documentation)
+  * [Installation](#installation)
+  * [Testing](#testing)
+
+# Todo List
 
 1. documentation
 2. *shrug*
 3. tooling
 
 This code is extremely proof-of-concepty. Once we work in production with it for a few months we'll have it cleaned up and documented.
+
+# Documentation
+
+Documentation and more information about Event Sourcery can be found in the core [event-sourcery/event-sourcery](https://github.com/event-sourcery/event-sourcery) repository.
 
 # Installation #
 
