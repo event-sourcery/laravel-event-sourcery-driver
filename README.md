@@ -10,6 +10,9 @@ This is the Laravel driver for the [Event Sourcery](https://github.com/event-sou
   * [Documentation](#documentation)
   * [Installation](#installation)
   * [Testing](#testing)
+  * [Other Framework Support](#other-framework-support)
+   * [Symfony](#symfony)
+   * [Others?](#others)
 
 # Todo List
 
@@ -47,3 +50,13 @@ A vagrant virtualmachine is provided for testing.
 `vagrant ssh`
 
 `bin/phpunit`
+
+# Other Framework Support #
+
+## Symfony ##
+
+Coming soon.
+
+## Others? ##
+
+Please [create an issue](https://github.com/event-sourcery/event-sourcery/issues) on the core [event-sourcery/event-sourcery](https://github.com/event-sourcery/event-sourcery) with the particular framework support request.
