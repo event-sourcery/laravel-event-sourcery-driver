@@ -1,10 +1,12 @@
 {
   "name": "event-sourcery/laravel-event-sourcery-driver",
-  "description": "Laravel driver for an Event Sourcing / CQRS framework.",
+  "description": "Laravel Driver for a Minimalistic PHP Event Sourcing / CQRS Library with GDPR Support.",
   "keywords": [
     "event sourcing",
     "cqrs",
-    "laravel"
+    "laravel",
+    "event sourcery",
+    "gdpr"
   ],
   "authors": [
     {
