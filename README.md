@@ -11,8 +11,8 @@ This is the Laravel driver for the [Event Sourcery](https://github.com/event-sou
   * [Installation](#installation)
   * [Testing](#testing)
   * [Other Framework Support](#other-framework-support)
-   * [Symfony](#symfony)
-   * [Others?](#others)
+    * [Symfony](#symfony)
+    * [Others?](#others)
 
 # Todo List
 
