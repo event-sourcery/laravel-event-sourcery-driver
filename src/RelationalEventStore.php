@@ -13,11 +13,12 @@ use Illuminate\Support\Collection;
 
 class RelationalEventStore implements EventStore {
 
-    private $table = 'event_store';
-
     /** @var DomainEventSerializer */
     private $serializer;
 
+    private $table = 'event_store';
+
+    // The DomainEventSerializer will transform events to/from objects
     public function __construct(DomainEventSerializer $serializer) {
         $this->serializer = $serializer;
     }
@@ -67,6 +68,7 @@ class RelationalEventStore implements EventStore {
             $this->getStreamRawEventData($id)->map(function ($e) {
 
                 $e->event_data = (array) json_decode($e->event_data);
+                $e = (array) $e;
 
                 return new StreamEvent(
                     StreamId::fromString($e->stream_id),
@@ -88,7 +90,8 @@ class RelationalEventStore implements EventStore {
      */
     public function getEvents($take = 0, $skip = 0): DomainEvents {
         $eventData = $this->getRawEvents($take, $skip);
-        $events    = $eventData->map(function ($e) {
+
+        $events = $eventData->map(function ($e) {
             $e->event_data = (array) json_decode($e->event_data);
             return $this->serializer->deserialize($e);
         })->toArray();

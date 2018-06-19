@@ -1,13 +1,13 @@
 <?php namespace EventSourcery\Laravel;
 
+use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
+use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
-use EventSourcery\EventSourcery\EventSourcing\DomainEventSerializer;
-use EventSourcery\EventSourcery\EventSourcing\EventDispatcher;
 
 class DispatchDomainEvents implements ShouldQueue {
 
@@ -29,8 +29,10 @@ class DispatchDomainEvents implements ShouldQueue {
         })->toArray();
 
         // generate a list of serialized events
-        $serializedEvents = $events->map(function (DomainEvent $event) {
-            return $event->serialize();
+        /** @var DomainEventSerializer $serializer */
+        $serializer = app(DomainEventSerializer::class);
+        $serializedEvents = $events->map(function (DomainEvent $event) use ($serializer) {
+            return $serializer->serialize($event);
         })->toArray();
 
         // create an array of tuples [event name, serialized event]
@@ -78,10 +80,7 @@ class DispatchDomainEvents implements ShouldQueue {
         $events = [];
         foreach ($this->serializedEvents as $serializedEvent) {
             list($eventName, $eventData) = $serializedEvent;
-            $events[] = $serializer->deserialize((object) [
-                'event_name' => $eventName,
-                'event_data' => $eventData,
-            ]);
+            $events[] = $serializer->deserialize(json_decode($eventData));
         }
         return DomainEvents::make($events);
     }

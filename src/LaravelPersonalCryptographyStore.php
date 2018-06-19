@@ -22,7 +22,7 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
         $this->table()->insert([
             'personal_key'          => $person->serialize(),
             'cryptographic_details' => $crypto->serialize(),
-            'type'                  => $crypto->type(),
+            'encryption'            => $crypto->encryption(),
         ]);
     }
 

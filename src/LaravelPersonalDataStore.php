@@ -66,7 +66,7 @@ class LaravelPersonalDataStore implements PersonalDataStore {
             'personal_key'            => $personalKey->serialize(),
             'data_key'                => $dataKey->serialize(),
             'encrypted_personal_data' => $this->encryption->encrypt($data, $crypto)->serialize(),
-            'encryption'              => $crypto->type(),
+            'encryption'              => $crypto->encryption(),
         ]);
     }
 
