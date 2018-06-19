@@ -18,6 +18,7 @@ class LaravelPersonalDataStore implements PersonalDataStore {
 
     /** @var PersonalCryptographyStore */
     private $cryptographyStore;
+
     /** @var PersonalDataEncryption */
     private $encryption;
 
@@ -26,6 +27,14 @@ class LaravelPersonalDataStore implements PersonalDataStore {
         $this->encryption        = $encryption;
     }
 
+    /**
+     * retrieve data from the personal data store based on a personal key and data key.
+     *
+     * @param PersonalKey $personalKey
+     * @param PersonalDataKey $dataKey
+     * @return PersonalData
+     * @throws CouldNotRetrievePersonalData
+     */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData {
         $data = $this->table()->where('data_key', '=', $dataKey->serialize())->first();
 
@@ -41,7 +50,14 @@ class LaravelPersonalDataStore implements PersonalDataStore {
         return PersonalData::fromString($decrypted);
     }
 
-    public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data) {
+    /**
+     * store data in the personal data store identified by a personal key and a data key
+     *
+     * @param PersonalKey $personalKey
+     * @param PersonalDataKey $dataKey
+     * @param PersonalData $data
+     */
+    public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
         return $this->table()->insert([
@@ -51,10 +67,20 @@ class LaravelPersonalDataStore implements PersonalDataStore {
         ]);
     }
 
+    /**
+     * remove all data for a person from the data store
+     *
+     * @param PersonalKey $personalKey
+     */
     function removeDataFor(PersonalKey $personalKey) {
         $this->table()->where('personal_key', '=', $personalKey->serialize())->delete();
     }
 
+    /**
+     * Obtain a reference to the data store table builder object with which to run queries.
+     *
+     * @return Builder
+     */
     private function table(): Builder {
         return DB::table('personal_data_store');
     }

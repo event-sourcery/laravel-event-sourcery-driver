@@ -21,13 +21,8 @@ class EventSourceryServiceProvider extends ServiceProvider {
     public function register() {
         $this->app->bind(DomainEventSerializer::class, ReflectionBasedDomainEventSerializer::class);
 
-        $this->app->singleton(DomainEventClassMap::class, function ($app) {
-            return new DomainEventClassMap;
-        });
-
-        $this->app->singleton(EventDispatcher::class, function ($app) {
-            return new ImmediateEventDispatcher;
-        });
+        $this->app->singleton(DomainEventClassMap::class);
+        $this->app->singleton(EventDispatcher::class);
 
         $this->app->singleton(EventStore::class, function ($app) {
             return new RelationalEventStore($app[DomainEventSerializer::class]);
@@ -38,11 +33,8 @@ class EventSourceryServiceProvider extends ServiceProvider {
         });
 
         $this->app->bind(CommandBus::class, ReflectionResolutionCommandBus::class);
-
         $this->app->bind(PersonalCryptographyStore::class, LaravelPersonalCryptographyStore::class);
-
         $this->app->bind(PersonalDataStore::class, LaravelPersonalDataStore::class);
-
         $this->app->bind(PersonalDataEncryption::class, AesPersonalDataEncryption::class);
     }
 

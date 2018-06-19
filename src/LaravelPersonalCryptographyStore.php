@@ -12,12 +12,19 @@ use Illuminate\Database\Query\Builder;
 
 class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
 
+    /**
+     * add a person (identified by personal key) and their cryptographic details
+     *
+     * @param PersonalKey $person
+     * @param CryptographicDetails $crypto
+     */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto) {
         $this->table()->insert([
             'personal_key'          => $person->serialize(),
             'cryptographic_details' => $crypto->serialize(),
         ]);
     }
+
 
     function getCryptographyFor(PersonalKey $person): CryptographicDetails {
         $crypto = $this->table()->where('personal_key', '=', $person->serialize())->first();
