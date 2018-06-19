@@ -1,6 +1,7 @@
 <?php namespace EventSourcery\Laravel;
 
 use DB;
+use EventSourcery\EventSourcery\PersonalData\CanNotFindPersonalDataByKey;
 use EventSourcery\EventSourcery\PersonalData\CouldNotRetrievePersonalData;
 use EventSourcery\EventSourcery\PersonalData\EncryptedPersonalData;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
@@ -34,17 +35,18 @@ class LaravelPersonalDataStore implements PersonalDataStore {
      * @param PersonalDataKey $dataKey
      * @return PersonalData
      * @throws CouldNotRetrievePersonalData
+     * @throws CanNotFindPersonalDataByKey
      */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData {
         $data = $this->table()->where('data_key', '=', $dataKey->serialize())->first();
 
         if ( ! $data) {
-            throw new CouldNotRetrievePersonalData($dataKey->serialize());
+            throw new CanNotFindPersonalDataByKey($dataKey->serialize());
         }
 
         $decrypted = $this->encryption->decrypt(
-            $this->cryptographyStore->getCryptographyFor($personalKey),
-            EncryptedPersonalData::deserialize($data->encrypted_personal_data)
+            EncryptedPersonalData::deserialize($data->encrypted_personal_data),
+            $this->cryptographyStore->getCryptographyFor($personalKey)
         )->toString();
 
         return PersonalData::fromString($decrypted);
@@ -60,10 +62,11 @@ class LaravelPersonalDataStore implements PersonalDataStore {
     public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
-        return $this->table()->insert([
+        $this->table()->insert([
             'personal_key'            => $personalKey->serialize(),
             'data_key'                => $dataKey->serialize(),
-            'encrypted_personal_data' => $this->encryption->encrypt($crypto, $data)->serialize(),
+            'encrypted_personal_data' => $this->encryption->encrypt($data, $crypto)->serialize(),
+            'encryption'              => $crypto->type(),
         ]);
     }
 
@@ -72,7 +75,7 @@ class LaravelPersonalDataStore implements PersonalDataStore {
      *
      * @param PersonalKey $personalKey
      */
-    function removeDataFor(PersonalKey $personalKey) {
+    function removeDataFor(PersonalKey $personalKey): void {
         $this->table()->where('personal_key', '=', $personalKey->serialize())->delete();
     }
 

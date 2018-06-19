@@ -6,7 +6,7 @@ use EventSourcery\EventSourcery\EventDispatch\EventDispatcher;
 use EventSourcery\EventSourcery\EventDispatch\ImmediateEventDispatcher;
 use EventSourcery\EventSourcery\EventSourcing\DomainEventClassMap;
 use EventSourcery\EventSourcery\EventSourcing\EventStore;
-use EventSourcery\EventSourcery\PersonalData\AesPersonalDataEncryption;
+use EventSourcery\EventSourcery\PersonalData\LibSodiumEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataStore;
@@ -22,7 +22,10 @@ class EventSourceryServiceProvider extends ServiceProvider {
         $this->app->bind(DomainEventSerializer::class, ReflectionBasedDomainEventSerializer::class);
 
         $this->app->singleton(DomainEventClassMap::class);
-        $this->app->singleton(EventDispatcher::class);
+
+        $this->app->singleton(EventDispatcher::class, function($app) {
+            return new ImmediateEventDispatcher();
+        });
 
         $this->app->singleton(EventStore::class, function ($app) {
             return new RelationalEventStore($app[DomainEventSerializer::class]);
@@ -35,7 +38,7 @@ class EventSourceryServiceProvider extends ServiceProvider {
         $this->app->bind(CommandBus::class, ReflectionResolutionCommandBus::class);
         $this->app->bind(PersonalCryptographyStore::class, LaravelPersonalCryptographyStore::class);
         $this->app->bind(PersonalDataStore::class, LaravelPersonalDataStore::class);
-        $this->app->bind(PersonalDataEncryption::class, AesPersonalDataEncryption::class);
+        $this->app->bind(PersonalDataEncryption::class, LibSodiumEncryption::class);
     }
 
     public function boot() {

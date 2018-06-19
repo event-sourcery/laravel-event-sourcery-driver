@@ -62,16 +62,16 @@
         },
         {
             "name": "event-sourcery/event-sourcery",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "ff45b6df3568004232eabdd926ea644c2ca1a96f"
+                "reference": "a1d431339c5f0fb106fac29aa6f8d195aed4a964"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/ff45b6df3568004232eabdd926ea644c2ca1a96f",
-                "reference": "ff45b6df3568004232eabdd926ea644c2ca1a96f",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/a1d431339c5f0fb106fac29aa6f8d195aed4a964",
+                "reference": "a1d431339c5f0fb106fac29aa6f8d195aed4a964",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-06-19T11:50:15+00:00"
+            "time": "2018-06-19T13:28:34+00:00"
         },
         {
             "name": "paragonie/random_compat",

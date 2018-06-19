@@ -18,23 +18,36 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
      * @param PersonalKey $person
      * @param CryptographicDetails $crypto
      */
-    function addPerson(PersonalKey $person, CryptographicDetails $crypto) {
+    function addPerson(PersonalKey $person, CryptographicDetails $crypto): void {
         $this->table()->insert([
             'personal_key'          => $person->serialize(),
             'cryptographic_details' => $crypto->serialize(),
+            'type'                  => $crypto->type(),
         ]);
     }
 
-
+    /**
+     * get cryptography details for a person (identified by personal key)
+     *
+     * @param PersonalKey $person
+     * @throws CanNotFindCryptographyForPerson
+     * @return CryptographicDetails
+     */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails {
         $crypto = $this->table()->where('personal_key', '=', $person->serialize())->first();
         if ( ! $crypto) {
             throw new CanNotFindCryptographyForPerson($person->serialize());
         }
+
         return CryptographicDetails::deserialize($crypto->cryptographic_details);
     }
 
-    function removePerson(PersonalKey $person) {
+    /**
+     * remove cryptographic details for a person (identified by personal key)
+     *
+     * @param PersonalKey $person
+     */
+    function removePerson(PersonalKey $person): void {
         $this->table()->where('personal_key', '=', $person->serialize())->delete();
     }
 

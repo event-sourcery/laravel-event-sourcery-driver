@@ -1,10 +1,8 @@
 <?php namespace EventSourcery\Laravel;
 
-use Illuminate\Database\Connection;
-use Illuminate\Database\Query\Builder;
+use EventSourcery\EventSourcery\Queries\Projection;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 use EventSourcery\EventSourcery\EventSourcing\EventStore;
-use EventSourcery\EventSourcery\EventSourcing\Projection;
 
 abstract class RelationalProjection implements Projection {
 
@@ -15,15 +13,23 @@ abstract class RelationalProjection implements Projection {
         $this->events = $events;
     }
 
+    /**
+     * return the name of the projection
+     *
+     * @return string
+     */
     abstract public function name() : string;
 
-    abstract public function tableName(): string;
+    /**
+     * clear the entire projection's state
+     */
+    abstract public function reset() : void;
 
-    private function getShortName($class) : string {
-        $className = explode('\\', get_class($class));
-        return $className[count($className) - 1];
-    }
-
+    /**
+     * receives domain events and routes them to a method with their name
+     *
+     * @param DomainEvent $event
+     */
     public function handle(DomainEvent $event) : void {
         $method = lcfirst($this->getShortName($event));
         if (method_exists($this, $method)) {
@@ -31,9 +37,15 @@ abstract class RelationalProjection implements Projection {
         }
     }
 
-    protected function table() : Builder {
-        return \DB::table($this->tableName());
+    /**
+     * takes a fully namespaced class name and returns a short class-name
+     * only version to match conventions.
+     *
+     * @param $class
+     * @return string
+     */
+    private function getShortName($class) : string {
+        $className = explode('\\', get_class($class));
+        return $className[count($className) - 1];
     }
-
-    abstract public function reset() : void;
 }
