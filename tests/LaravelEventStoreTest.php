@@ -6,17 +6,17 @@ use EventSourcery\EventSourcery\PersonalData\InitializationVector;
 use EventSourcery\EventSourcery\PersonalData\LibSodiumEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use EventSourcery\Laravel\LaravelPersonalCryptographyStore;
-use EventSourcery\Laravel\RelationalEventStore;
+use EventSourcery\Laravel\LaravelEventStore;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Tests\EventSourcery\Laravel\Stubs\TestEmail;
 use Tests\EventSourcery\Laravel\Stubs\TestEvent;
 use Tests\EventSourcery\Laravel\Stubs\TestPersonalEvent;
 
-class RelationalEventStoreTest extends TestCase {
+class LaravelEventStoreTest extends TestCase {
 
     use InteractsWithDatabase;
 
-    /** @var RelationalEventStore */
+    /** @var LaravelEventStore */
     private $dataStore;
 
     /** @var LaravelPersonalCryptographyStore */
@@ -27,7 +27,7 @@ class RelationalEventStoreTest extends TestCase {
 
     function setUp() {
         parent::setUp();
-        $this->dataStore   = $this->app->make(RelationalEwventStore::class);
+        $this->dataStore   = $this->app->make(LaravelEventStore::class);
         $this->cryptoStore = new LaravelPersonalCryptographyStore();
         $this->encryption  = new LibSodiumEncryption();
 

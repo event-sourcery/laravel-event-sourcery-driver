@@ -11,14 +11,18 @@ use EventSourcery\EventSourcery\EventSourcing\StreamVersion;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use Illuminate\Support\Collection;
 
-class RelationalEventStore implements EventStore {
+/**
+ * The LaravelEventStore is a Laravel-specific implementation of
+ * an EventStore. It uses the default relational driver configured
+ * in the Laravel application.
+ */
+class LaravelEventStore implements EventStore {
 
     /** @var DomainEventSerializer */
     private $serializer;
 
     private $table = 'event_store';
 
-    // The DomainEventSerializer will transform events to/from objects
     public function __construct(DomainEventSerializer $serializer) {
         $this->serializer = $serializer;
     }
@@ -67,13 +71,12 @@ class RelationalEventStore implements EventStore {
         return StreamEvents::make(
             $this->getStreamRawEventData($id)->map(function ($e) {
 
-                $e->event_data = (array) json_decode($e->event_data);
-                $e = (array) $e;
+                $e->event_data = json_decode($e->event_data);
 
                 return new StreamEvent(
                     StreamId::fromString($e->stream_id),
                     StreamVersion::fromInt($e->stream_version),
-                    $this->serializer->deserialize($e)
+                    $this->serializer->deserialize($e->event_data)
                 );
 
             })->toArray()

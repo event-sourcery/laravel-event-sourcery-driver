@@ -9,6 +9,11 @@ use Illuminate\Queue\SerializesModels;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvents;
 
+/**
+ * DispatchDomainEvents is a Laravel Queue Job that will take
+ * a domain events collection and dispatch them to listeners in
+ * an asynchronous queue worker.
+ */
 class DispatchDomainEvents implements ShouldQueue {
 
     use InteractsWithQueue, Queueable, SerializesModels;

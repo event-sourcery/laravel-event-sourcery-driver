@@ -15,6 +15,11 @@ use EventSourcery\EventSourcery\PersonalData\ProtectedData;
 use EventSourcery\EventSourcery\PersonalData\ProtectedDataKey;
 use Illuminate\Database\Query\Builder;
 
+/**
+ * The LaravelPersonalDataStore is the Laravel-specific implementation of
+ * a PersonalDataStore. It uses the default relational driver configured
+ * in the Laravel application.
+ */
 class LaravelPersonalDataStore implements PersonalDataStore {
 
     /** @var PersonalCryptographyStore */
@@ -34,8 +39,9 @@ class LaravelPersonalDataStore implements PersonalDataStore {
      * @param PersonalKey $personalKey
      * @param PersonalDataKey $dataKey
      * @return PersonalData
-     * @throws CouldNotRetrievePersonalData
      * @throws CanNotFindPersonalDataByKey
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsDoNotContainKey
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
      */
     public function retrieveData(PersonalKey $personalKey, PersonalDataKey $dataKey): PersonalData {
         $data = $this->table()->where('data_key', '=', $dataKey->serialize())->first();
@@ -58,6 +64,8 @@ class LaravelPersonalDataStore implements PersonalDataStore {
      * @param PersonalKey $personalKey
      * @param PersonalDataKey $dataKey
      * @param PersonalData $data
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsDoNotContainKey
+     * @throws \EventSourcery\EventSourcery\PersonalData\CryptographicDetailsNotCompatibleWithEncryption
      */
     public function storeData(PersonalKey $personalKey, PersonalDataKey $dataKey, PersonalData $data): void {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);

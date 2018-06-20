@@ -10,6 +10,11 @@ use EventSourcery\EventSourcery\PersonalData\PersonalEncryptionKeyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use Illuminate\Database\Query\Builder;
 
+/**
+ * The LaravelPersonalCryptographyStore is the Laravel-specific implementation
+ * of a PersonalCryptographyStore. It uses the default relational driver for
+ * the Laravel application.
+ */
 class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
 
     /**
@@ -32,9 +37,11 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
      * @param PersonalKey $person
      * @throws CanNotFindCryptographyForPerson
      * @return CryptographicDetails
+     * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails {
         $crypto = $this->table()->where('personal_key', '=', $person->serialize())->first();
+
         if ( ! $crypto) {
             throw new CanNotFindCryptographyForPerson($person->serialize());
         }

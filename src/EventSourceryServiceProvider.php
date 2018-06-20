@@ -10,12 +10,16 @@ use EventSourcery\EventSourcery\PersonalData\LibSodiumEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataStore;
-use EventSourcery\EventSourcery\Queries\ProjectionManager;
-use EventSourcery\EventSourcery\Queries\Projections;
+use EventSourcery\EventSourcery\StreamProcessing\ProjectionManager;
+use EventSourcery\EventSourcery\StreamProcessing\Projections;
 use EventSourcery\EventSourcery\Serialization\DomainEventSerializer;
 use EventSourcery\EventSourcery\Serialization\ReflectionBasedDomainEventSerializer;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * The EventSourceryServiceProvider is the bootstrap for the event sourcery
+ * library in a Laravel environment.
+ */
 class EventSourceryServiceProvider extends ServiceProvider {
 
     public function register() {
@@ -28,7 +32,7 @@ class EventSourceryServiceProvider extends ServiceProvider {
         });
 
         $this->app->singleton(EventStore::class, function ($app) {
-            return new RelationalEventStore($app[DomainEventSerializer::class]);
+            return new LaravelEventStore($app[DomainEventSerializer::class]);
         });
 
         $this->app->singleton(ProjectionManager::class, function ($app) {
