@@ -14,7 +14,7 @@ This code is extremely proof-of-concepty. Once we work in production with it for
 
 # Installation #
 
-`composer require event-sourcery/laravel`
+`composer require event-sourcery/laravel-event-sourcery-driver`
 
 Laravel will auto-detect the package and the service provider will be installed automatically.
 
