@@ -28,7 +28,7 @@ Documentation and more information about Event Sourcery can be found in the core
 
 # Installation #
 
-`composer require event-sourcery/laravel`
+`composer require event-sourcery/laravel-event-sourcery-driver`
 
 Laravel will auto-detect the package and the service provider will be installed automatically.
 

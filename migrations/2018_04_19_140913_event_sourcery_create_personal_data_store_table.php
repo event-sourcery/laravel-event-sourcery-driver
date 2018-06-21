@@ -12,6 +12,7 @@ class EventSourceryCreatePersonalDataStoreTable extends Migration {
             $t->string('personal_key');
             $t->string('data_key');
             $t->text('encrypted_personal_data');
+            $t->string('encryption');
             $t->timestamps();
         });
     }

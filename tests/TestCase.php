@@ -10,6 +10,7 @@ class TestCase extends OrchestraTestCase {
 
     protected function setUp() {
         parent::setUp();
+        $this->artisan('migrate:reset', ['--database' => 'development']);
         $this->artisan('migrate', ['--database' => 'development']);
 
         $this->app->bind(DomainEventClassMap::class, function() {
@@ -18,11 +19,6 @@ class TestCase extends OrchestraTestCase {
             $classMap->add("TestPersonalEvent", TestPersonalEvent::class);
             return $classMap;
         });
-    }
-
-    protected function tearDown() {
-        $this->artisan('migrate:reset', ['--database' => 'development']);
-        parent::tearDown();
     }
 
     protected function getEnvironmentSetUp($app) {

@@ -9,6 +9,7 @@ use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use EventSourcery\Laravel\LaravelPersonalCryptographyStore;
 
 class LaravelPersonalCryptographyStoreTest extends TestCase {
+
     /** @var PersonalCryptographyStore */
     private $cryptoStore;
 
@@ -20,10 +21,7 @@ class LaravelPersonalCryptographyStoreTest extends TestCase {
     function testPeopleCanBeAdded() {
         $person = PersonalKey::fromString("this is a person's identity");
 
-        $crypto = new CryptographicDetails(
-            EncryptionKey::generate(),
-            InitializationVector::generate()
-        );
+        $crypto = new CryptographicDetails('stub', []);
 
         $this->cryptoStore->addPerson($person, $crypto);
 
@@ -35,10 +33,7 @@ class LaravelPersonalCryptographyStoreTest extends TestCase {
     function testPeopleCanBeRemoved() {
         $person = PersonalKey::fromString("a personal identity token");
 
-        $crypto = new CryptographicDetails(
-            EncryptionKey::generate(),
-            InitializationVector::generate()
-        );
+        $crypto = new CryptographicDetails('stub', []);
 
         $this->cryptoStore->addPerson($person, $crypto);
         $this->cryptoStore->removePerson($person);

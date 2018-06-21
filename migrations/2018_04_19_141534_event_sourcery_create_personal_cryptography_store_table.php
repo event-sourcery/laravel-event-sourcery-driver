@@ -11,6 +11,7 @@ class EventSourceryCreatePersonalCryptographyStoreTable extends Migration {
             $t->increments('id');
             $t->string('personal_key');
             $t->text('cryptographic_details');
+            $t->string('encryption');
             $t->timestamps();
         });
     }

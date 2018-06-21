@@ -1,10 +1,10 @@
 <?php namespace Tests\EventSourcery\Laravel;
 
 use EventSourcery\EventSourcery\PersonalData\CanNotFindCryptographyForPerson;
-use EventSourcery\EventSourcery\PersonalData\CouldNotRetrievePersonalData;
-use EventSourcery\EventSourcery\PersonalData\CryptographicDetails;
+use EventSourcery\EventSourcery\PersonalData\CanNotFindPersonalDataByKey;
 use EventSourcery\EventSourcery\PersonalData\EncryptionKey;
 use EventSourcery\EventSourcery\PersonalData\InitializationVector;
+use EventSourcery\EventSourcery\PersonalData\LibSodiumEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalCryptographyStore;
 use EventSourcery\EventSourcery\PersonalData\PersonalData;
 use EventSourcery\EventSourcery\PersonalData\PersonalDataKey;
@@ -19,27 +19,31 @@ class LaravelPersonalDataStoreTest extends TestCase {
     private $dataStore;
     /** @var PersonalCryptographyStore */
     private $cryptoStore;
+    /** @var LibSodiumEncryption */
+    private $encryption;
+
 
     function setUp() {
         parent::setUp();
+
         $this->dataStore = $this->app->make(LaravelPersonalDataStore::class);
         $this->cryptoStore = new LaravelPersonalCryptographyStore();
+        $this->encryption = new LibSodiumEncryption();
     }
 
     public function testThrowsWhenDataCantBeRetrieved() {
-        $this->expectException(CouldNotRetrievePersonalData::class);
-        $this->dataStore->retrieveData(PersonalKey::fromString("personal"), PersonalDataKey::generate());
+        $this->expectException(CanNotFindPersonalDataByKey::class);
+        $this->dataStore->retrieveData(PersonalKey::fromString('personal'), PersonalDataKey::generate());
     }
 
     public function testPersonalDataCanBeStored() {
-        $personalKey = PersonalKey::fromString("test123");
+        $personalKey = PersonalKey::fromString('test123');
         $dataKey = PersonalDataKey::generate();
         $dataString = "this is just some regular stuff that doesn't need encryption";
 
-        $this->cryptoStore->addPerson($personalKey, new CryptographicDetails(
-            EncryptionKey::generate(),
-            InitializationVector::generate()
-        ));
+        $crypto = $this->encryption->generateCryptographicDetails();
+
+        $this->cryptoStore->addPerson($personalKey, $crypto);
 
         $this->dataStore->storeData($personalKey, $dataKey, PersonalData::fromString($dataString));
 
@@ -49,7 +53,7 @@ class LaravelPersonalDataStoreTest extends TestCase {
 
     public function testCannotStoreDataWithoutPersonalCrypto() {
         $this->expectException(CanNotFindCryptographyForPerson::class);
-        $personalKey = PersonalKey::fromString("test456");
+        $personalKey = PersonalKey::fromString('test456');
         $dataKey = PersonalDataKey::generate();
         $this->dataStore->storeData($personalKey, $dataKey, PersonalData::fromString('arbitrary data'));
     }

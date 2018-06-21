@@ -3,6 +3,11 @@
 use EventSourcery\EventSourcery\EventDispatch\Listener;
 use EventSourcery\EventSourcery\EventSourcing\DomainEvent;
 
+/**
+ * LogDomainEvents is a basic event Listener that will store
+ * a string serialized version of each domain event that it
+ * observes.
+ */
 class LogDomainEvents implements Listener {
 
     public function handle(DomainEvent $event): void {
