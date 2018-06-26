@@ -18,6 +18,7 @@
   "require": {
     "php": "^7.1",
     "event-sourcery/event-sourcery": "dev-master",
+    "heybigname/phpspec-laravel": "^4.0",
     "psr/container": "1.0.0"
   },
   "require-dev": {
