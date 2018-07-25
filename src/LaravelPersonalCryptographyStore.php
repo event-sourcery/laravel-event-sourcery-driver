@@ -25,8 +25,8 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
      */
     function addPerson(PersonalKey $person, CryptographicDetails $crypto): void {
         $this->table()->insert([
-            'personal_key'          => $person->serialize(),
-            'cryptographic_details' => $crypto->serialize(),
+            'personal_key'          => $person->toString(),
+            'cryptographic_details' => json_encode($crypto->serialize()),
             'encryption'            => $crypto->encryption(),
         ]);
     }
@@ -40,13 +40,15 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
      * @throws \EventSourcery\EventSourcery\PersonalData\CannotDeserializeCryptographicDetails
      */
     function getCryptographyFor(PersonalKey $person): CryptographicDetails {
-        $crypto = $this->table()->where('personal_key', '=', $person->serialize())->first();
+        $crypto = $this->table()->where('personal_key', '=', $person->toString())->first();
 
         if ( ! $crypto) {
-            throw new CanNotFindCryptographyForPerson($person->serialize());
+            throw new CanNotFindCryptographyForPerson($person->toString());
         }
 
-        return CryptographicDetails::deserialize($crypto->cryptographic_details);
+        $details = (array) json_decode($crypto->cryptographic_details);
+
+        return CryptographicDetails::deserialize($details);
     }
 
     /**
@@ -55,7 +57,7 @@ class LaravelPersonalCryptographyStore implements PersonalCryptographyStore {
      * @param PersonalKey $person
      */
     function removePerson(PersonalKey $person): void {
-        $this->table()->where('personal_key', '=', $person->serialize())->delete();
+        $this->table()->where('personal_key', '=', $person->toString())->delete();
     }
 
     private function table(): Builder {

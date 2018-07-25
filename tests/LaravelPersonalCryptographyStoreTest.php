@@ -40,6 +40,5 @@ class LaravelPersonalCryptographyStoreTest extends TestCase {
 
         $this->expectException(CanNotFindCryptographyForPerson::class);
         $this->cryptoStore->getCryptographyFor($person);
-
     }
 }

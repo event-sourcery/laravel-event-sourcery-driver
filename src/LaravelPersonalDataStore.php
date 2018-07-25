@@ -47,7 +47,7 @@ class LaravelPersonalDataStore implements PersonalDataStore {
         $data = $this->table()->where('data_key', '=', $dataKey->serialize())->first();
 
         if ( ! $data) {
-            throw new CanNotFindPersonalDataByKey($dataKey->serialize());
+            throw new CanNotFindPersonalDataByKey($dataKey->toString());
         }
 
         $decrypted = $this->encryption->decrypt(
@@ -71,8 +71,8 @@ class LaravelPersonalDataStore implements PersonalDataStore {
         $crypto = $this->cryptographyStore->getCryptographyFor($personalKey);
 
         $this->table()->insert([
-            'personal_key'            => $personalKey->serialize(),
-            'data_key'                => $dataKey->serialize(),
+            'personal_key'            => $personalKey->toString(),
+            'data_key'                => $dataKey->toString(),
             'encrypted_personal_data' => $this->encryption->encrypt($data, $crypto)->serialize(),
             'encryption'              => $crypto->encryption(),
         ]);

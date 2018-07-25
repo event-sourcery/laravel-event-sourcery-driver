@@ -22,15 +22,35 @@ class TestEmail implements SerializablePersonalDataValue {
         return $this->personalKey;
     }
 
-    public function serialize(): string {
-        return json_encode([
+    public function serialize(): array {
+        return [
             'personalKey' => $this->personalKey->toString(),
             'email' => $this->email,
-        ]);
+        ];
     }
 
-    public static function deserialize(string $string) {
-        $values = json_decode($string);
-        return new static(PersonalKey::fromString($values->personalKey), $values->email);
+    public static function deserialize(array $data) {
+        return new static(PersonalKey::fromString($data['personalKey']), $data['email']);
+    }
+
+    /**
+     * the factory method to build this data from erased state
+     *
+     * @param PersonalKey $personalKey
+     * @return mixed
+     */
+    public static function fromErasedState(PersonalKey $personalKey) {
+        return new static($personalKey, 'email@testemail.com');
+    }
+
+    /**
+     * the wasErased method returns true if built fromErasedState.
+     * due to the requirements for individual value objects, this must
+     * be implemented manually
+     *
+     * @return bool
+     */
+    public function wasErased(): bool {
+
     }
 }
