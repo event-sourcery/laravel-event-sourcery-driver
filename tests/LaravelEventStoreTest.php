@@ -1,8 +1,6 @@
 <?php namespace Tests\EventSourcery\Laravel;
 
 use EventSourcery\EventSourcery\EventSourcing\StreamId;
-use EventSourcery\EventSourcery\PersonalData\EncryptionKey;
-use EventSourcery\EventSourcery\PersonalData\InitializationVector;
 use EventSourcery\EventSourcery\PersonalData\LibSodiumEncryption;
 use EventSourcery\EventSourcery\PersonalData\PersonalKey;
 use EventSourcery\Laravel\LaravelPersonalCryptographyStore;

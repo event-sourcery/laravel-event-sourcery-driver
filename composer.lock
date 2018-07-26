@@ -339,12 +339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/event-sourcery/event-sourcery.git",
-                "reference": "678b4a1d3f9da32356b8b6a1b1e7fd11a35fa4d7"
+                "reference": "9cd54c3ef27dc37cb9de08005d6c60727ab0f264"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/678b4a1d3f9da32356b8b6a1b1e7fd11a35fa4d7",
-                "reference": "678b4a1d3f9da32356b8b6a1b1e7fd11a35fa4d7",
+                "url": "https://api.github.com/repos/event-sourcery/event-sourcery/zipball/9cd54c3ef27dc37cb9de08005d6c60727ab0f264",
+                "reference": "9cd54c3ef27dc37cb9de08005d6c60727ab0f264",
                 "shasum": ""
             },
             "require": {
@@ -379,7 +379,7 @@
                 "gdpr",
                 "reactive"
             ],
-            "time": "2018-07-25T15:50:15+00:00"
+            "time": "2018-07-26T10:12:32+00:00"
         },
         {
             "name": "heybigname/phpspec-laravel",

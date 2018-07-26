@@ -34,7 +34,7 @@ class LaravelEventStore implements EventStore {
      */
     public function storeStream(StreamEvents $events): void {
         // store events
-        $events->each(function ($stream) {
+        $events->each(function (StreamEvent $stream) {
             $this->store($stream->id(), $stream->event(), $stream->version());
         });
 
@@ -71,7 +71,7 @@ class LaravelEventStore implements EventStore {
         return StreamEvents::make(
             $this->getStreamRawEventData($id)->map(function ($e) {
 
-                $e->event_data = json_decode($e->event_data);
+                $e->event_data = json_decode($e->event_data, true);
 
                 return new StreamEvent(
                     StreamId::fromString($e->stream_id),
@@ -95,7 +95,7 @@ class LaravelEventStore implements EventStore {
         $eventData = $this->getRawEvents($take, $skip);
 
         $events = $eventData->map(function ($e) {
-            $e->event_data = (array) json_decode($e->event_data);
+            $e->event_data = json_decode($e->event_data, true);
             return $this->serializer->deserialize($e);
         })->toArray();
 

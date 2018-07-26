@@ -85,7 +85,7 @@ class DispatchDomainEvents implements ShouldQueue {
         $events = [];
         foreach ($this->serializedEvents as $serializedEvent) {
             list($eventName, $eventData) = $serializedEvent;
-            $events[] = $serializer->deserialize(json_decode($eventData));
+            $events[] = $serializer->deserialize(json_decode($eventData, true));
         }
         return DomainEvents::make($events);
     }
