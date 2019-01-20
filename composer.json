@@ -18,12 +18,12 @@
   "require": {
     "php": "^7.1",
     "event-sourcery/event-sourcery": "dev-master",
-    "heybigname/phpspec-laravel": "^4.0",
     "psr/container": "1.0.0"
   },
   "require-dev": {
     "orchestra/testbench": "^3.6",
-    "phpunit/phpunit": "^7.1"
+    "phpunit/phpunit": "^7.1",
+    "heybigname/phpspec-laravel": "^4.0"
   },
   "autoload": {
     "psr-4": {
